@@ -1,4 +1,5 @@
 import random
+import time
 
 from selenium.webdriver.common.by import By
 
@@ -21,6 +22,8 @@ class HomePage(BasePage):
 
     COMPONENTS_SUBSECTION = (By.XPATH, '//a[text()="Show AllComponents"]')
     H_COMPONENTS = (By.CSS_SELECTOR, 'div#content h2')
+    COMPONENTS_LIST = (By.CSS_SELECTOR, 'div#content div[class="row"] div[class="col-sm-3"] ul li a')
+    H2_TEXT = (By.CSS_SELECTOR, 'div#content  h2')
 
     def click_section(self, section):
         sections = {'desktops': self.DESKTOPS,
@@ -39,5 +42,11 @@ class HomePage(BasePage):
         self.element_is_visible(self.COMPONENTS).click()
         self.element_is_visible(self.COMPONENTS_SUBSECTION).click()
         text = self.element_is_visible(self.H_COMPONENTS).text
-        return text
+        item_list = self.elements_are_visible(self.COMPONENTS_LIST)
+        item = item_list[random.randint(0, 4)]
+        item.click()
+        text_2 = self.element_is_visible(self.H2_TEXT).text
+        return text, text_2
+
+
 

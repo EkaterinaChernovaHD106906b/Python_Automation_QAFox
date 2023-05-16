@@ -3,6 +3,7 @@ import time
 
 from pages.desktop_page import DesktopPage
 from pages.home_page import HomePage
+from pages.monitors_page import MonitorsPage
 
 
 class TestPages:
@@ -25,8 +26,21 @@ class TestPages:
     def test_subsections(self, driver):
         home_page = HomePage(driver, 'https://tutorialsninja.com/demo/index.php?route=common/home')
         home_page.open()
-        text = home_page.choose_subsection_components()
+        text, text_2 = home_page.choose_subsection_components()
+        time.sleep(5)
+        print(text_2)
         assert text == 'Components', 'Test failed'
+        assert text != text_2
+
+    def test_buy_apple_monitor(self, driver):
+        monitors_page = MonitorsPage(driver, 'https://tutorialsninja.com/demo/index.php?route=product/category&path=25_28')
+        monitors_page.open()
+        monitors_page.buy_apple_monitor('14')
+        time.sleep(5)
+
+
+
+
 
 
 
