@@ -4,6 +4,7 @@ import time
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.select import Select
 
+from generator.generator import generated_file
 from pages.base_page import BasePage
 
 
@@ -23,7 +24,10 @@ class MonitorsPage(BasePage):
     APPLE_UPLOAD_FILE = (By.CSS_SELECTOR, 'button#button-upload222')
     APPLE_DATE_BUTTON = (By.CSS_SELECTOR, 'div[class="input-group date"] button[class="btn btn-default"]')
     APPLE_CHOICE_DATE = (By.XPATH, '/html/body/div[4]/div/div[1]/table/tbody/tr/td')
-
+    APPLE_UPLOAD_INPUT = (By.CSS_SELECTOR, 'input#input-option222')
+    APPLE_SELECTED_DATE = (By.CSS_SELECTOR, 'div[class="input-group date"] input#input-option219')
+    APPLE_TIME_BUTTON = (By.CSS_SELECTOR, 'div[class="input-group time"] button[class="btn btn-default"]')
+    APPLE_TIME_VALUE = (By.CSS_SELECTOR, 'input#input-option221')
     # Samsung
 
     SAMSUNG_MONITOR = (By.XPATH, '//a[contains(text(),"Samsung")]')
@@ -41,7 +45,7 @@ class MonitorsPage(BasePage):
         checkbox.click()
         self.scroll_by(300)
         self.element_is_visible(self.APPLE_INPUT_TEXT).clear()
-        input_apple = self.element_is_visible(self.APPLE_INPUT_TEXT).send_keys('Brand: Apple')
+        self.element_is_visible(self.APPLE_INPUT_TEXT).send_keys('Brand: Apple')
         values = ['1', '2', '3', '4']
         Select(self.driver.find_element(By.CSS_SELECTOR, 'select#input-option217')).select_by_value(
             values[random.randint(0, 3)])
@@ -53,4 +57,16 @@ class MonitorsPage(BasePage):
             if item.text == date:
                 item.click()
                 break
+        date = self.element_is_visible(self.APPLE_SELECTED_DATE).get_attribute('value')
+        print(f'Selected date {date}')
+        element = self.element_is_present(self.APPLE_TIME_VALUE)
+        js = self.driver.execute_script("arguments[0].setAttribute('value','00:00')", element)
+        self.scroll_by(300)
+        time_value = element.get_attribute('value')
+        print(f'Selected time {time_value}')
+
+
+
+
+
 
