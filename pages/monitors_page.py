@@ -13,6 +13,7 @@ class MonitorsPage(BasePage):
     SELECT_OPTIONS_LIST_SORT = (By.CSS_SELECTOR, 'input-sort')
     SELECT_OPTIONS_LIST_SHOW = (By.CSS_SELECTOR, 'select#input-limit option')
     PRODUCTS_LIST = (By.CSS_SELECTOR, 'div[class="caption"] a')
+
     # Apple
 
     APPLE_MONITOR = (By.XPATH, '//a[contains(text(),"Apple")]')
@@ -36,6 +37,8 @@ class MonitorsPage(BasePage):
     # Samsung
 
     SAMSUNG_MONITOR = (By.XPATH, '//a[contains(text(),"Samsung")]')
+    SAMSUNG_QUANTITY = (By.CSS_SELECTOR, 'input#input-quantity')
+    SAMSUNG_ADD_TO_CARD = (By.CSS_SELECTOR, 'button#button-cart')
 
     def buy_apple_monitor(self, date):
         self.element_is_visible(self.LIST_VIEW).click()
@@ -82,6 +85,15 @@ class MonitorsPage(BasePage):
         self.element_is_visible(self.BUTTON_ADD_TO_CART).click()
         alert_success = self.element_is_visible(self.ALERT_SUCCESS).text
         return alert_success
+
+    def buy_samsung_monitor(self):
+        self.element_is_visible(self.SAMSUNG_QUANTITY).clear()
+        self.element_is_visible(self.SAMSUNG_QUANTITY).send_keys(random.randint(1, 5))
+        self.element_is_visible(self.SAMSUNG_ADD_TO_CARD).click()
+        alert_success = self.element_is_visible(self.ALERT_SUCCESS).text
+        return alert_success
+
+
 
 
 

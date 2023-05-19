@@ -39,6 +39,13 @@ class TestPages:
         time.sleep(5)
         assert text.replace('×', '').replace('\n', '') == 'Success: You have added Apple Cinema 30" to your shopping cart!'
 
+    def test_buy_samsung_monitor(self, driver):
+        monitors_page = MonitorsPage(driver, 'https://tutorialsninja.com/demo/index.php?route=product/product&path=25_28&product_id=33')
+        monitors_page.open()
+        text = monitors_page.buy_samsung_monitor()
+        time.sleep(5)
+        assert text.replace('×', '').replace('\n', '') == 'Success: You have added Samsung SyncMaster 941BW to your shopping cart!'
+
 
 
 
