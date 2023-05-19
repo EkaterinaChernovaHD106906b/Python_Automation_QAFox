@@ -35,8 +35,9 @@ class TestPages:
     def test_buy_apple_monitor(self, driver):
         monitors_page = MonitorsPage(driver, 'https://tutorialsninja.com/demo/index.php?route=product/category&path=25_28')
         monitors_page.open()
-        monitors_page.buy_apple_monitor('14')
+        text = monitors_page.buy_apple_monitor('14')
         time.sleep(5)
+        assert text.replace('×', '').replace('\n', '') == 'Success: You have added Apple Cinema 30" to your shopping cart!'
 
 
 
