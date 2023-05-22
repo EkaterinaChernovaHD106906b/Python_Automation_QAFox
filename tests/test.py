@@ -4,6 +4,7 @@ import time
 from pages.desktop_page import DesktopPage
 from pages.home_page import HomePage
 from pages.monitors_page import MonitorsPage
+from pages.payment_page import PaymentPage
 
 
 class TestPages:
@@ -36,6 +37,10 @@ class TestPages:
         monitors_page = MonitorsPage(driver, 'https://tutorialsninja.com/demo/index.php?route=product/category&path=25_28')
         monitors_page.open()
         text = monitors_page.buy_apple_monitor('14')
+        payment_page = PaymentPage(driver,
+                                   'https://tutorialsninja.com/demo/index.php?route=product/product&path=25_28&product_id=33')
+        payment_page.payment()
+
         time.sleep(5)
         assert text.replace('×', '').replace('\n', '') == 'Success: You have added Apple Cinema 30" to your shopping cart!'
 
@@ -43,8 +48,13 @@ class TestPages:
         monitors_page = MonitorsPage(driver, 'https://tutorialsninja.com/demo/index.php?route=product/product&path=25_28&product_id=33')
         monitors_page.open()
         text = monitors_page.buy_samsung_monitor()
+        payment_page = PaymentPage(driver,
+                                   'https://tutorialsninja.com/demo/index.php?route=product/product&path=25_28&product_id=33')
+        text_order = payment_page.payment()
         time.sleep(5)
         assert text.replace('×', '').replace('\n', '') == 'Success: You have added Samsung SyncMaster 941BW to your shopping cart!'
+        assert text_order == 'Your order has been placed!'
+
 
 
 

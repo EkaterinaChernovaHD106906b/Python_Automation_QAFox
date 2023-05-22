@@ -51,6 +51,10 @@ class BasePage:
         scroll_by = f'window.scrollBy(0, {scroll_value});'
         self.driver.execute_script(scroll_by)
 
+    def scroll_height(self):
+        scroll_height = "window.scrollTo(document.body.scrollHeight, 0);"
+        self.driver.execute_script(scroll_height)
+
 
 
 

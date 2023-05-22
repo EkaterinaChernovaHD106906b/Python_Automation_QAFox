@@ -46,10 +46,13 @@ class GooglePage(BasePage):
         self.element_is_visible(self.BUTTON_SUBMIT).click()
         self.scroll_by(1500)
         self.element_is_visible(self.POST_FIELD).click()
+        self.element_is_visible(self.POST_FIELD).clear()
         self.element_is_visible(self.POST_FIELD).send_keys('Selenium with Python')
         self.scroll_by(1500)
         action.key_down(Keys.CONTROL).send_keys('v').key_up(Keys.CONTROL).perform()
-        self.element_is_visible(self.SEND_POST).click()
+        time.sleep(3)
+        self.driver.execute_script("window.scrollTo(document.body.scrollHeight, 0);")
+        self.element_is_clickable(self.SEND_POST).click()
 
 
 
