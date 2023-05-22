@@ -36,8 +36,8 @@ class GooglePage(BasePage):
         action.key_down(Keys.CONTROL).send_keys('c').key_up(Keys.CONTROL).perform()
         # save image
         self.driver.get('https://vk.com/login')
-        login = ''
-        password = ''
+        login = '******'
+        password = '********'
         self.element_is_visible(self.PHONE_NUMBER).send_keys(login)
         self.element_is_visible(self.BUTTON_SUBMIT).click()
         self.element_is_visible(self.PASSWORD).send_keys(password)
