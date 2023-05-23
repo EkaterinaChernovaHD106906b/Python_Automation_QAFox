@@ -5,6 +5,7 @@ from pages.desktop_page import DesktopPage
 from pages.home_page import HomePage
 from pages.monitors_page import MonitorsPage
 from pages.payment_page import PaymentPage
+from pages.phones_page import PhonePage
 
 
 class TestPages:
@@ -55,8 +56,21 @@ class TestPages:
         assert text.replace('×', '').replace('\n', '') == 'Success: You have added Samsung SyncMaster 941BW to your shopping cart!'
         assert text_order == 'Your order has been placed!'
 
+    def test_phones_page_rating(self, driver):
+        phones_page = PhonePage(driver, 'https://tutorialsninja.com/demo/index.php?route=product/category&path=24')
+        phones_page.open()
+        alert_text = phones_page.choose_rating()
+        time.sleep(5)
+        assert alert_text == 'Thank you for your review. It has been submitted to the webmaster for approval.'
 
-
+    def test_buy_iphone(self, driver):
+        phones_page = PhonePage(driver, 'https://tutorialsninja.com/demo/index.php?route=product/product&path=24&product_id=40')
+        phones_page.open()
+        alert_text_success, alert_text_danger, shopping_cart = phones_page.buy_iphone()
+        time.sleep(5)
+        assert alert_text_success.replace('×', '').replace('\n', '') == 'Success: You have added iPhone to your shopping cart!'
+        assert alert_text_danger.replace('×', '').replace('\n', '') == 'Products marked with *** are not available in the desired quantity or not in stock!'
+        assert shopping_cart == 'Your shopping cart is empty!'
 
 
 
