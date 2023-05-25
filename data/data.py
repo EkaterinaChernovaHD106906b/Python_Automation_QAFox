@@ -10,6 +10,7 @@ class Person:
     address: str = None
     city: str = None
     post_code: str = None
+    password: str = None
 
 
 

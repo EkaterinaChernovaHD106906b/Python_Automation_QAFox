@@ -7,7 +7,6 @@ from pages.base_page import BasePage
 
 
 class MP3PlayersPage(BasePage):
-
     # Add to cart
     LIST_VIEW = (By.CSS_SELECTOR, 'button#list-view')
     SORT_BY = (By.CSS_SELECTOR, 'select#input-sort option')
@@ -29,6 +28,3 @@ class MP3PlayersPage(BasePage):
         self.element_is_visible(self.ADD_TO_CART).click()
         text_alert = self.element_is_visible(self.ALERT_SUCCESS).text
         return text_alert
-
-
-

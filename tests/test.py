@@ -7,6 +7,7 @@ from pages.monitors_page import MonitorsPage
 from pages.mp3players_page import MP3PlayersPage
 from pages.payment_page import PaymentPage
 from pages.phones_page import PhonePage
+from pages.registration_page import RegistrationPage
 
 
 class TestPages:
@@ -89,3 +90,9 @@ class TestPages:
         alert_text = mp3players_page.add_to_cart()
         time.sleep(5)
         assert alert_text.replace('×', '').replace('\n', '') == 'Success: You have added iPod Classic to your shopping cart!'
+
+    def test_registration_new_user(self, driver):
+        registration_page = RegistrationPage(driver, 'https://tutorialsninja.com/demo/index.php?route=account/register')
+        registration_page.open()
+        text = registration_page.registration_new_user()
+        assert text == 'Your Account Has Been Created!'

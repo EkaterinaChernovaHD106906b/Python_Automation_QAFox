@@ -23,5 +23,6 @@ def generated_person():
         tel=faker_en.phone_number(),
         address=faker_en.address(),
         city=faker_en.city(),
-        post_code=faker_en.postcode()
+        post_code=faker_en.postcode(),
+        password=faker_en.password()
     )
