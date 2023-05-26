@@ -96,3 +96,11 @@ class TestPages:
         registration_page.open()
         text = registration_page.registration_new_user()
         assert text == 'Your Account Has Been Created!'
+
+    def test_download_image(self, driver):
+        monitors_page = MonitorsPage(driver,
+                                     'https://tutorialsninja.com/demo/index.php?route=product/product&path=25_28&product_id=42')
+        monitors_page.open()
+        monitors_page.download_image_monitor()
+        time.sleep(5)
+

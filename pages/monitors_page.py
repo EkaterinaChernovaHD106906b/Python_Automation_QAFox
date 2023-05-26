@@ -1,6 +1,8 @@
+import os.path
 import random
 import time
 
+import requests
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.select import Select
 
@@ -39,6 +41,10 @@ class MonitorsPage(BasePage):
     SAMSUNG_MONITOR = (By.XPATH, '//a[contains(text(),"Samsung")]')
     SAMSUNG_QUANTITY = (By.CSS_SELECTOR, 'input#input-quantity')
     SAMSUNG_ADD_TO_CARD = (By.CSS_SELECTOR, 'button#button-cart')
+
+    # Download image
+
+    IMAGE_LINK = (By.XPATH, '//div[@id="content"]//div[1]//ul[@class="thumbnails"][1]//li[1]//a')
 
     def buy_apple_monitor(self, date):
         self.element_is_visible(self.LIST_VIEW).click()
@@ -92,6 +98,23 @@ class MonitorsPage(BasePage):
         self.element_is_visible(self.SAMSUNG_ADD_TO_CARD).click()
         alert_success = self.element_is_visible(self.ALERT_SUCCESS).text
         return alert_success
+
+    def download_image_monitor(self):
+        link = self.element_is_present(self.IMAGE_LINK).get_attribute('href')
+        path_name_file = rf'C:\Users\user\PycharmProjects\Python_Automation_QAFox\filetest{random.randint(1, 100)}.jpeg'
+        with open(path_name_file, 'wb+') as f:
+            f.write(requests.get(link).content)
+            check_file = os.path.exists(path_name_file)
+            f.close()
+        os.remove(path_name_file)
+        print(path_name_file)
+        return check_file
+
+
+
+
+
+
 
 
 
